@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funktionsbausteine3", "Funktionsbausteine3\Funktionsbausteine3.csproj", "{B41610C2-898B-4AB4-A2A1-FC5F0224486B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B41610C2-898B-4AB4-A2A1-FC5F0224486B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B41610C2-898B-4AB4-A2A1-FC5F0224486B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B41610C2-898B-4AB4-A2A1-FC5F0224486B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B41610C2-898B-4AB4-A2A1-FC5F0224486B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E55E4DC-14B2-4846-9955-0D4A17F123C4}
+	EndGlobalSection
+EndGlobal
