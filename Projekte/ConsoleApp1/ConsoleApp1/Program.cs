@@ -1,112 +1,87 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-class TicTacToe
+namespace ConsoleApp1
 {
-    static char[] board = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-    static int player = 1;
-    static Random random = new Random();
+    using System;
 
-    static void Main()
+    class Program
     {
-        while (true)
+        static string CaesarEncrypt(string plaintext, int key)
         {
-            ZeichneBrett();
-            if (player == 1)
+            string ciphertext = "";
+            foreach (char c in plaintext)
             {
-                HoleSpielerEingabe();
-            }
-            else
-            {
-                HoleComputerEingabe();
-            }
-            if (ÜberprüfeAufSieg())
-            {
-                if (player == 1)
+                if (Char.IsLetter(c))
                 {
-                    Console.WriteLine("Spieler hat gewonnen!");
+                    char shiftedChar = (char)(((c + key) - 'A') % 26 + 'A');
+                    ciphertext += shiftedChar;
                 }
                 else
                 {
-                    Console.WriteLine("Computer hat gewonnen!");
+                    ciphertext += c;
                 }
-                break;
             }
-            if (ÜberprüfeAufUnentschieden())
+            return ciphertext;
+        }
+
+        static string CaesarDecrypt(string ciphertext, int key)
+        {
+            string plaintext = "";
+            foreach (char c in ciphertext)
             {
-                Console.WriteLine("Es ist unentschieden!");
-                break;
+                if (Char.IsLetter(c))
+                {
+                    char shiftedChar = (char)(((c - key + 26) - 'A') % 26 + 'A');
+                    plaintext += shiftedChar;
+                }
+                else
+                {
+                    plaintext += c;
+                }
             }
-            WechsleSpieler();
+            return plaintext;
         }
-        Console.WriteLine("Drücken Sie eine beliebige Taste um das Programm zu beenden...");
-        Console.ReadKey();
-    }
-    static void ZeichneBrett()
-    {
-        Console.WriteLine(" {0} | {1} | {2} ", board[0], board[1], board[2]);
-        Console.WriteLine("---+---+---");
-        Console.WriteLine(" {0} | {1} | {2} ", board[3], board[4], board[5]);
-        Console.WriteLine("---+---+---");
-        Console.WriteLine(" {0} | {1} | {2} ", board[6], board[7], board[8]);
-    }
 
-    static void HoleSpielerEingabe()
-    {
-        Console.WriteLine("Spieler, wähle eine Zahl:");
-        int eingabe = int.Parse(Console.ReadLine());
-        if (eingabe < 1 || eingabe > 9)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Ungültige Eingabe, versuche es erneut.");
-            HoleSpielerEingabe();
-        }
-        else if (board[eingabe - 1] == 'X' || board[eingabe - 1] == 'O')
-        {
-            Console.WriteLine("Dieser Platz ist bereits besetzt, versuche es erneut.");
-            HoleSpielerEingabe();
-        }
-        else
-        {
-            board[eingabe - 1] = 'X';
-        }
-    }
+            Console.WriteLine("1. Encrypt text");
+            Console.WriteLine("2. Decrypt text");
 
-    static void HoleComputerEingabe()
-    {
-        int eingabe = random.Next(1, 10);
-        while (board[eingabe - 1] == 'X' || board[eingabe - 1] == 'O')
-        {
-            eingabe = random.Next(1, 10);
-        }
-        board[eingabe - 1] = 'O';
-        Console.WriteLine("Der Computer hat {0} gewählt.", eingabe);
-    }
-    static bool ÜberprüfeAufSieg()
-    {
-        if (board[0] == board[1] && board[1] == board[2]) return true;
-        if (board[3] == board[4] && board[4] == board[5]) return true;
-        if (board[6] == board[7] && board[7] == board[8]) return true;
-        if (board[0] == board[3] && board[3] == board[6]) return true;
-        if (board[1] == board[4] && board[4] == board[7]) return true;
-        if (board[2] == board[5] && board[5] == board[8]) return true;
-        if (board[0] == board[4] && board[4] == board[8]) return true;
-        if (board[2] == board[4] && board[4] == board[6]) return true;
-        return false;
-    }
+            Console.Write("Enter your choice (1 or 2): ");
+            int choice = Convert.ToInt32(Console.ReadLine());
 
-    static bool ÜberprüfeAufUnentschieden()
-    {
-        for (int i = 0; i < 9; i++)
-        {
-            if (board[i] != 'X' && board[i] != 'O')
+            if (choice == 1)
             {
-                return false;
+                Console.Write("Enter the text to be encrypted: ");
+                string plaintext = Console.ReadLine();
+
+                Console.Write("Enter the encryption key: ");
+                int key = Convert.ToInt32(Console.ReadLine());
+
+                string ciphertext = CaesarEncrypt(plaintext, key);
+                Console.WriteLine("Encrypted text: " + ciphertext);
             }
+            else if (choice == 2)
+            {
+                Console.Write("Enter the text to be decrypted: ");
+                string ciphertext = Console.ReadLine();
+
+                Console.Write("Enter the decryption key: ");
+                int key = Convert.ToInt32(Console.ReadLine());
+
+                string plaintext = CaesarEncrypt(ciphertext, -key);
+                Console.WriteLine("Decrypted text: " + plaintext);
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice");
+            }
+            Console.ReadLine();
         }
-        return true;
-    }
-    static void WechsleSpieler()
-    {
-        player = player == 1 ? 2 : 1;
     }
 }
+    
